@@ -1,3 +1,3 @@
-objects/**
-elf/**
+objects/*.o
+elf/*.elf
 
