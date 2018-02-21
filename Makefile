@@ -51,3 +51,8 @@ elf: $(file).elf
 	@mv $@ elf/
 	@echo "Created "$@
 
+flash:
+	@st-flash write $(file).bin 0x8000000
+
+socat:
+	@socat -,raw,echo=0,escape=0x03 /dev/ttyUSB0,b600,raw,echo=0
