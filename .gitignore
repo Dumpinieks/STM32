@@ -1,3 +1,9 @@
 objects/*.o
 elf/*.elf
 *.bin
+*.files
+*.includes
+*.creator
+*.user
+*.config
+
