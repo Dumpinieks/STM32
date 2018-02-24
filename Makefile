@@ -1,8 +1,7 @@
 file ?= main
-OUTPUT_NAME ?= $(file)
 LINKER = lib/STM32F103XB_FLASH.ld
 OBJECTS ?= objects/startup_stm32f103xb.o
-OBJECTS += objects/main.o
+OBJECTS += objects/$(file).o
 OBJECTS += objects/system_stm32f1xx.o
 CFLAGS = -Wall
 OBJECT = arm-none-eabi-gcc $(CFLAGS) --std=c99 -g3 -mthumb
@@ -22,7 +21,7 @@ assembling: folders deleteF $(file).bin
 	@echo "Success"
 
 $(file).bin: object elf
-	@$(BINARY) $(OUTPUT_NAME).bin
+	@$(BINARY) $(file).bin
 	@echo "Created "$@
 
 deleteF:
@@ -55,4 +54,4 @@ flash:
 	@st-flash write $(file).bin 0x8000000
 
 socat:
-	@socat -,raw,echo=0,escape=0x03 /dev/ttyUSB0,b600,raw,echo=0
+	@sudo socat -,raw,echo=0,escape=0x03 /dev/ttyUSB0,b9600,raw,echo=0
