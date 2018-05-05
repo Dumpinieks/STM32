@@ -4,11 +4,12 @@ OBJECTS ?= objects/startup_stm32f103xb.o
 OBJECTS += objects/$(file).o
 OBJECTS += objects/system_stm32f1xx.o
 CFLAGS = -Wall
-OBJECT = arm-none-eabi-gcc $(CFLAGS) --std=c99 -g3 -mthumb
+OBJECT = $(COMPILER_DIR)/arm-none-eabi-gcc $(CFLAGS) --std=c99 -g3 -mthumb
 OBJECT += -mcpu=cortex-m3 -ffreestanding -DDEBUG -DSTM32F103xB -Ilib/ -c
-COMP = arm-none-eabi-gcc $(CFLAGS) -Wl,-T$(LINKER) --std=c99 
+COMP = $(COMPILER_DIR)/arm-none-eabi-gcc $(CFLAGS) -Wl,-T$(LINKER) --std=c99 
 COMP += --specs=nosys.specs -mthumb -mcpu=cortex-m3 $(OBJECTS) -o
-BINARY = arm-none-eabi-objcopy -O binary elf/$(file).elf
+BINARY = $(COMPILER_DIR)/arm-none-eabi-objcopy -O binary elf/$(file).elf
+COMPILER_DIR := $(HOME)/opt/gcc-arm-none-eabi-7-2017-q4-major/bin
 
 vpath %.o objects/
 vpath %.c source/
