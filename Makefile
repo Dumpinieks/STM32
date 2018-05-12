@@ -18,8 +18,12 @@ vpath %.h lib/
 vpath %.ld lib/
 vpath %.elf elf/
 
+load: assembling flash
+
 assembling: folders deleteF $(file).bin
 	@echo "Success"
+
+usart: load socat
 
 $(file).bin: object elf
 	@$(BINARY) $(file).bin
